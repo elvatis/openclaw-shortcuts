@@ -88,6 +88,44 @@ export default function register(api: any) {
     },
   });
 
+  function readOriginRepoSlug(repoDir: string): string | null {
+    // Supports git@github.com:owner/repo.git and https://github.com/owner/repo(.git)
+    try {
+      const cfgPath = path.join(resolvedWorkspace, repoDir, ".git", "config");
+      const raw = fs.readFileSync(cfgPath, "utf-8");
+      const m = raw.match(/\[remote \"origin\"\][^\[]*?url\s*=\s*(.+)\s*/i);
+      const url = (m?.[1] ?? "").trim();
+      if (!url) return null;
+
+      let mm = url.match(/github\.com[:/]+([^/\s]+)\/([^/\s]+?)(?:\.git)?$/i);
+      if (!mm) return null;
+      const owner = mm[1];
+      const repo = mm[2];
+      if (!owner || !repo) return null;
+      return `${owner}/${repo}`;
+    } catch {
+      return null;
+    }
+  }
+
+  async function getGithubVisibility(slug: string): Promise<"public" | "private" | "unknown"> {
+    try {
+      // Use gh CLI (already configured in your environment). Keep it best-effort.
+      const { execSync } = await import("node:child_process");
+      const out = execSync(`gh repo view ${slug} --json visibility --jq .visibility`, {
+        stdio: ["ignore", "pipe", "ignore"],
+      }).toString("utf-8").trim().toLowerCase();
+
+      if (out === "public" || out === "private" || out === "internal") {
+        // internal treated as private from user's perspective
+        return out === "public" ? "public" : "private";
+      }
+      return "unknown";
+    } catch {
+      return "unknown";
+    }
+  }
+
   api.registerCommand({
     name: "projects",
     description: "List local projects (git repos) in the workspace",
@@ -98,9 +136,18 @@ export default function register(api: any) {
       if (projects.length === 0) {
         return { text: `No git projects found under ${resolvedWorkspace}.` };
       }
+
       const lines: string[] = [];
       lines.push(`Projects (${projects.length}):`);
-      for (const p of projects) lines.push(`- ${p}`);
+
+      // Best-effort enrichment with GitHub visibility.
+      // If gh is not authenticated or no origin is set, show (unknown).
+      for (const p of projects) {
+        const slug = readOriginRepoSlug(p);
+        const vis = slug ? await getGithubVisibility(slug) : "unknown";
+        lines.push(`- ${p} (${vis})`);
+      }
+
       return { text: lines.join("\n") };
     },
   });
