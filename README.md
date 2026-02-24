@@ -17,7 +17,9 @@ openclaw gateway restart
 
 ## Configure
 
-Example:
+The repo stays placeholder-only. You customize `/help` locally via plugin config.
+
+Example (using **public** projects as references):
 
 ```json
 {
@@ -29,10 +31,18 @@ Example:
           "includeTips": true,
           "sections": [
             {
-              "title": "Shortcuts",
+              "title": "Public example projects",
+              "lines": [
+                "- AAHP - protocol + handoff structure example",
+                "- BMAS - research project example"
+              ]
+            },
+            {
+              "title": "Your shortcuts (fill in locally)",
               "lines": [
                 "- /aegis - show PRIVATE_PROJECT status",
-                "- /bmas - show BMAS status"
+                "- /bmas - show BMAS status",
+                "- /elvatis - blog context"
               ]
             }
           ]
@@ -43,4 +53,4 @@ Example:
 }
 ```
 
-(Keep sensitive details out of the repo. Config lives on your machine.)
+Security reminder: keep private commands, phone numbers, group IDs, tokens, and internal workflows out of the repo. Store them only in local config.
