@@ -108,7 +108,17 @@ export default function register(api: any) {
     }
   }
 
-  async function getGithubVisibility(slug: string): Promise<"public" | "private" | "unknown"> {
+  type Vis = "public" | "private" | "unknown";
+
+  function fmtVis(vis: Vis): string {
+    // Chat surfaces usually don't support ANSI colors reliably.
+    // Use symbols by default.
+    if (vis === "public") return "🟩 public";
+    if (vis === "private") return "🟥 private";
+    return "⬜ unknown";
+  }
+
+  async function getGithubVisibility(slug: string): Promise<Vis> {
     try {
       // Use gh CLI (already configured in your environment). Keep it best-effort.
       const { execSync } = await import("node:child_process");
@@ -145,7 +155,7 @@ export default function register(api: any) {
       for (const p of projects) {
         const slug = readOriginRepoSlug(p);
         const vis = slug ? await getGithubVisibility(slug) : "unknown";
-        lines.push(`- ${p} (${vis})`);
+        lines.push(`- ${p} (${fmtVis(vis)})`);
       }
 
       return { text: lines.join("\n") };
