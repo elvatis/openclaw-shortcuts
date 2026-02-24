@@ -15,6 +15,12 @@ openclaw plugins install -l ~/.openclaw/workspace/openclaw-help
 openclaw gateway restart
 ```
 
+## ClawHub
+
+```bash
+clawhub install openclaw-help
+```
+
 ## Configure
 
 The repo stays placeholder-only. You customize `/help` locally via plugin config.
