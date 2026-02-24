@@ -1,8 +1,8 @@
 {
   "id": "openclaw-shortcuts",
   "name": "OpenClaw Shortcuts",
-  "version": "0.2.0",
-  "description": "Enhanced /help command listing local shortcuts and commands.",
+  "version": "0.2.1",
+  "description": "OpenClaw plugin: local /shortcuts and /projects commands (config-driven, placeholder-safe).", 
   "configSchema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
