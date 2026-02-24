@@ -10,12 +10,12 @@ export default function register(api: any) {
   const includeTips = cfg.includeTips !== false;
 
   api.registerCommand({
-    name: "help",
-    description: "Show help and local shortcuts (generic by default)",
+    name: "shortcuts",
+    description: "Show local shortcuts and helper commands (generic by default)",
     acceptsArgs: false,
     handler: async () => {
       const lines: string[] = [];
-      lines.push("Help");
+      lines.push("Shortcuts");
       lines.push("");
 
       // Generic placeholders only. Users can configure their own sections.

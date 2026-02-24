@@ -5,13 +5,13 @@ description: OpenClaw plugin providing a config-driven /help command (safe place
 
 # openclaw-help
 
-Adds a `/help` command to your OpenClaw agent.
+Adds a `/shortcuts` command to your OpenClaw agent.
 
 The key design goal is **safety for public repos**: the plugin ships with **generic placeholder help text**. You inject your real shortcuts locally via config (e.g., in `~/.openclaw/openclaw.json`).
 
 ## What it does
 
-- Registers `/help`
+- Registers `/shortcuts`
 - Prints:
   - generic default sections (Shortcuts / Memory / TODO)
   - optional tips

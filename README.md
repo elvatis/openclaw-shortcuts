@@ -1,6 +1,6 @@
 # openclaw-help
 
-Enhanced `/help` command for OpenClaw.
+Enhanced `/shortcuts` command for OpenClaw.
 
 ## Security note
 
@@ -23,7 +23,7 @@ clawhub install openclaw-help
 
 ## Configure
 
-The repo stays placeholder-only. You customize `/help` locally via plugin config.
+The repo stays placeholder-only. You customize `/shortcuts` locally via plugin config.
 
 Example (using **public** projects as references):
 
