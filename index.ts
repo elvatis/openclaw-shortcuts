@@ -97,7 +97,7 @@ export default function register(api: any) {
       const url = (m?.[1] ?? "").trim();
       if (!url) return null;
 
-      let mm = url.match(/github\.com[:/]+([^/\s]+)\/([^/\s]+?)(?:\.git)?$/i);
+      const mm = url.match(/github\.com[:/]+([^/\s]+)\/([^/\s]+?)(?:\.git)?$/i);
       if (!mm) return null;
       const owner = mm[1];
       const repo = mm[2];
@@ -105,6 +105,16 @@ export default function register(api: any) {
       return `${owner}/${repo}`;
     } catch {
       return null;
+    }
+  }
+
+  function hasAnyRemote(repoDir: string): boolean {
+    try {
+      const cfgPath = path.join(resolvedWorkspace, repoDir, ".git", "config");
+      const raw = fs.readFileSync(cfgPath, "utf-8");
+      return /\[remote\s+"/i.test(raw);
+    } catch {
+      return false;
     }
   }
 
@@ -154,7 +164,13 @@ export default function register(api: any) {
       // If gh is not authenticated or no origin is set, show (unknown).
       for (const p of projects) {
         const slug = readOriginRepoSlug(p);
-        const vis = slug ? await getGithubVisibility(slug) : "unknown";
+        if (!slug) {
+          // Local-only project (no GitHub origin, or non-GitHub remote)
+          const anyRemote = hasAnyRemote(p);
+          lines.push(`- ${p} (${anyRemote ? "⬜ remote" : "⬜ local"})`);
+          continue;
+        }
+        const vis = await getGithubVisibility(slug);
         lines.push(`- ${p} (${fmtVis(vis)})`);
       }
 
