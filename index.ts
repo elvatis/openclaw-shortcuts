@@ -12,8 +12,8 @@ export default function register(api: any) {
   api.registerCommand({
     name: "help",
     description: "Show help and local shortcuts (generic by default)",
-    usage: "/help",
-    run: async () => {
+    acceptsArgs: false,
+    handler: async () => {
       const lines: string[] = [];
       lines.push("Help");
       lines.push("");
@@ -59,7 +59,7 @@ export default function register(api: any) {
 
       lines.push("(This /help output is intentionally generic. Configure your own sections in plugin config.)");
 
-      return { ok: true, message: lines.join("\n") };
+      return { text: lines.join("\n") };
     },
   });
 }
