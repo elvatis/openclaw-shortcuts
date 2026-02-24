@@ -40,9 +40,8 @@ Example (using **public** projects as references):
             {
               "title": "Your shortcuts (fill in locally)",
               "lines": [
-                "- /aegis - show PRIVATE_PROJECT status",
-                "- /bmas - show BMAS status",
-                "- /elvatis - blog context"
+                "- /<project> - your project shortcut",
+                "- /<command> - your custom command"
               ]
             }
           ]
