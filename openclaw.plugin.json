@@ -1,7 +1,7 @@
 {
   "id": "openclaw-help",
   "name": "OpenClaw Help",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Enhanced /help command listing local shortcuts and commands.",
   "configSchema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
