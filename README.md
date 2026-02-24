@@ -1,4 +1,4 @@
-# openclaw-help
+# openclaw-shortcuts
 
 Enhanced `/shortcuts` command for OpenClaw.
 
@@ -11,14 +11,14 @@ Instead, customize the output via plugin config.
 ## Install (dev)
 
 ```bash
-openclaw plugins install -l ~/.openclaw/workspace/openclaw-help
+openclaw plugins install -l ~/.openclaw/workspace/openclaw-shortcuts
 openclaw gateway restart
 ```
 
 ## ClawHub
 
 ```bash
-clawhub install openclaw-help
+clawhub install openclaw-shortcuts
 ```
 
 ## Configure
@@ -31,7 +31,7 @@ Example (using **public** projects as references):
 {
   "plugins": {
     "entries": {
-      "openclaw-help": {
+      "openclaw-shortcuts": {
         "enabled": true,
         "config": {
           "includeTips": true,

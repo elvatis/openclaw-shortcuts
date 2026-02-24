@@ -1,9 +1,9 @@
 ---
-name: openclaw-help
+name: openclaw-shortcuts
 description: OpenClaw plugin providing a config-driven /help command (safe placeholder-only defaults).
 ---
 
-# openclaw-help
+# openclaw-shortcuts
 
 Adds a `/shortcuts` command to your OpenClaw agent.
 
@@ -31,7 +31,7 @@ This plugin avoids that by:
 From ClawHub:
 
 ```bash
-clawhub install openclaw-help
+clawhub install openclaw-shortcuts
 ```
 
 For local development:

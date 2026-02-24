@@ -1,6 +1,6 @@
 {
-  "name": "openclaw-help",
-  "version": "0.1.5",
+  "name": "openclaw-shortcuts",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "openclaw": { "extensions": ["./index.ts"] }
