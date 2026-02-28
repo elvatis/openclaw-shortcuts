@@ -66,3 +66,8 @@ Example (using **public** projects as references):
 ```
 
 Security reminder: keep private commands, phone numbers, group IDs, tokens, and internal workflows out of the repo. Store them only in local config.
+
+## Shared Template
+
+For automation that creates GitHub issues, use `src/templates/github-issue-helper.ts`.
+It provides `isValidIssueRepoSlug()`, `resolveIssueRepo()`, and `buildGhIssueCreateCommand()`.
